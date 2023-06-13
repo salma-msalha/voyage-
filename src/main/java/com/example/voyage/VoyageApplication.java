@@ -8,6 +8,7 @@ public class VoyageApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(VoyageApplication.class, args);
+		System.out.println("salaam");
 	}
 
 }
