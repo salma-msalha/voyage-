@@ -9,7 +9,7 @@ public class VoyageApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(VoyageApplication.class, args);
 		System.out.println("test salma");
-		System.out.println("test nouhaila");
+		System.out.println("test nouhaila1");
 	}
 
 }
