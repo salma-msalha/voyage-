@@ -6,6 +6,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 @Data
 @AllArgsConstructor@NoArgsConstructor@ToString
 @Entity
@@ -13,4 +17,13 @@ import lombok.ToString;
 public class Visiteur {
     @Id@GeneratedValue(strategy = GenerationType.IDENTITY)
     private long ID;
+    @ManyToMany
+    private Set<Pack> packs= new HashSet<>();
+    @ManyToMany
+    private Set<Service> services= new HashSet<>();
+    @ManyToMany
+    private Set<Chambre> chambres= new HashSet<>();
+    @ManyToMany
+    private Set<Vol> vols= new HashSet<>();
+
 }

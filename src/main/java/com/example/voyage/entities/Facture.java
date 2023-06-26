@@ -14,4 +14,6 @@ public class Facture {
     private long ID;
     private String reservation;
     private Double total;
+    @ManyToOne
+    private Reservation Reserv ;
 }

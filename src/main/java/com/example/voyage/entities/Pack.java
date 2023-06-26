@@ -7,6 +7,9 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
+
 @Data@AllArgsConstructor@NoArgsConstructor@ToString
 @Entity
 @Table
@@ -17,4 +20,14 @@ public class Pack {
     private Date date_fin;
     private String Description;
     private Double prxMini;
+    @ManyToOne
+    private Vol vol;
+    @ManyToOne
+    private Chambre chamb;
+    @ManyToOne
+    private Service serv;
+    @ManyToMany(mappedBy = "packs")
+    private Set<Visiteur> visiteurs= new HashSet<>();
+    @ManyToOne
+    private Administrateur Admin;
 }

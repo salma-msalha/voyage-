@@ -7,7 +7,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Data
 @NoArgsConstructor
@@ -22,16 +24,17 @@ public class Administrateur {
     private String Nom;
     private String Prn;
 
+
     @OneToMany(mappedBy = "Admin")
     private List<Client> Clients;
-    /*@OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "fk_idCA")
     private Compte Compte;
 
     @OneToMany(mappedBy = "Admin")
     private List<Reservation> Reservations;
     @OneToMany(mappedBy = "Admin")
-    private List<Pack> Packs;*/
+    private List<Pack> Packs;
 
 
 }

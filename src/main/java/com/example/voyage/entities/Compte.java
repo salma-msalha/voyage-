@@ -14,7 +14,11 @@ public class Compte {
     private long ID;
     private String Pseudo;
     private String Mdp;
-    @OneToMany(cascade = CascadeType.ALL)
+
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="fk_idCC")
     private Client Client;
+    @OneToOne(cascade= CascadeType.ALL)
+    @JoinColumn(name="fk_idCA")
+    private Administrateur Admin;
 }

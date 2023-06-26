@@ -6,7 +6,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+
 @Data@NoArgsConstructor@AllArgsConstructor@ToString
 @Entity
 @Table
@@ -20,7 +23,7 @@ public class Client {
     private String N_passeport;
     private String tele;
     @ManyToOne
-    private Administrateur admin;
+    private Administrateur Admin;
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="fk_idCC")
     private Compte Compte;

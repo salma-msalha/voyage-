@@ -8,6 +8,10 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 @Data@AllArgsConstructor@NoArgsConstructor@ToString
 @Entity
 @Table
@@ -24,4 +28,10 @@ public class Vol {
     private int N_place;
     private Double prix_achat;
     private Double prix_vente;
+    @OneToMany(mappedBy = "vol")
+    private List<Pack> packs;
+    @OneToMany
+    private List<Reservation> reservations;
+    @ManyToMany(mappedBy = "vols")
+    private Set<Visiteur> visiteurs= new HashSet<>();
 }

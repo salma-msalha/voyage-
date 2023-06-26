@@ -6,6 +6,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 @Data@AllArgsConstructor@NoArgsConstructor@ToString
 @Entity
 @Table
@@ -17,4 +21,6 @@ public class Hotel {
     private String site;
     private String email;
     private String tel;
+    @OneToMany(mappedBy = "Hotel")
+    private List<Chambre> Chambres;
 }
