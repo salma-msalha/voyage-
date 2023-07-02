@@ -36,7 +36,7 @@
                 <ul>
                     <li><a href="index.html">Home</a></li>
                     <li><a href="about.html">About Us</a></li>
-                    <li class="active"><a href="room.html">Rooms</a></li>
+                    <li class="active"><a href="room_vol.html">Rooms</a></li>
                     <li><a href="amenities.html">Amenities</a></li>
                     <li><a href="booking.html">Booking</a></li>
                     <li><a href="login.html">Login</a></li>
@@ -51,7 +51,71 @@
             <div class="container">
                 <div class="form-row">
                     <div class="control-group col-md-3">
-                        <label>Check-In</label>
+                        <div class="form-row">
+                            <div class="control-group col-md-6">
+                                <label for="ville-depart">Ville de départ</label>
+                                <div class="custom-select1">
+                                    <select id="ville-depart" name="ville-depart"></select>
+                    </div>
+                            </div>
+                            <div class="control-group col-md-6">
+                                <label for="ville-arrivee">Ville d'arrivée</label>
+                                <div class="custom-select1">
+                                    <select id="ville-arrivee" name="ville-arrivee"></select>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                    <script>
+  var villes = [
+    "Casablanca",
+    "Rabat",
+    "Marrakech",
+    "Fès",
+    "Tanger",
+    "Agadir",
+    "Meknès",
+    "Oujda",
+    "Kenitra",
+    "Essaouira",
+    "El Jadida",
+    "Nador",
+    "Safi",
+    "Tétouan",
+    "Salé",
+    "Beni Mellal",
+    "Ouarzazate",
+    "Khouribga",
+    "Taroudant",
+    "Laâyoune",
+    "Settat",
+    "Taza",
+    "Al Hoceima",
+    "Berkane",
+    "Errachidia",
+    "Larache",
+    "Tiznit",
+    "Mohammedia",
+    "El Kelaa des Sraghna"
+  ];
+
+  function genererOptionsVilles(elementId) {
+    var select = document.getElementById(elementId);
+    for (var i = 0; i < villes.length; i++) {
+      var option = document.createElement("option");
+      option.value = villes[i];
+      option.textContent = villes[i];
+      select.appendChild(option);
+    }
+  }
+
+  genererOptionsVilles("ville-depart");
+  genererOptionsVilles("ville-arrivee");
+</script>
+
+
+                    <div class="control-group col-md-3">
+                        <label>date de départ</label>
                         <div class="form-group">
                             <div class="input-group date" id="date-3" data-target-input="nearest">
                                 <input type="text" class="form-control datetimepicker-input" data-target="#date-3"/>
@@ -62,7 +126,7 @@
                         </div>
                     </div>
                     <div class="control-group col-md-3">
-                        <label>Check-Out</label>
+                        <label>date de retour</label>
                         <div class="form-group">
                             <div class="input-group date" id="date-4" data-target-input="nearest">
                                 <input type="text" class="form-control datetimepicker-input" data-target="#date-4"/>
@@ -75,7 +139,7 @@
                     <div class="control-group col-md-3">
                         <div class="form-row">
                             <div class="control-group col-md-6">
-                                <label>Adult</label>
+                                <label>Adulte(s)</label>
                                 <select class="custom-select">
                                     <option selected>0</option>
                                     <option value="1">1</option>
@@ -91,7 +155,7 @@
                                 </select>
                             </div>
                             <div class="control-group col-md-6 kid">
-                                <label>Kid</label>
+                                <label>Enfant(s)</label>
                                 <select class="custom-select">
                                     <option selected>0</option>
                                     <option value="1">1</option>
@@ -108,8 +172,23 @@
                             </div>
                         </div>
                     </div>
+                            <div class="control-group col-md-3">
+                                <div class="form-row">
+                                    <div class="control-group col-md-6 ">
+                                        <label>classe</label>
+                                        <select class="custom-select">
+                                    <option value="Economique">Economique</option>
+                                    <option value="Economique premium">Economique premium</option>
+                                    <option value="Affaires">Affaires</option>
+                                    <option value="Première">Première</option>
+                                </select>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="control-group col-md-3">
-                        <button class="btn btn-block">Search</button>
+                        <button class="btn btn-block">rechercher</button>
                     </div>
                 </div>
             </div>

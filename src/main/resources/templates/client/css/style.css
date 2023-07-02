@@ -59,7 +59,50 @@ h6 {
         font-weight: 400;
     }
 }
+/*debut*/
 
+.flight-icon {
+  position: absolute;
+  top: 15px;
+  left: 200px;
+  padding: 10px;
+  border-radius: 50%;
+}
+
+.flight-icon i {
+  font-size: 24px;
+  color: white;
+}
+.flight-icon span {
+  margin-left: 5px;
+  font-size: 18px;
+  color: white;
+  font-weight: bold;
+}
+.accommodation-icon {
+  position: absolute;
+  top: 15px;
+  left: 320px;
+  padding: 10px;
+  border-radius: 50%;
+}
+
+.accommodation-icon i {
+  font-size: 24px;
+  color: white;
+}
+.accommodation-icon span {
+  margin-left: 5px;
+  font-size: 18px;
+  color: white;
+  font-weight: bold;
+}
+
+
+
+
+
+/*fin*/
 .back-to-top {
     position: fixed;
     display: none;
@@ -185,30 +228,32 @@ h6 {
     padding-right: 25px;
     padding-left: 10px;
     right: 0;
-    color: #FFD700;
     line-height: 60px;
     cursor: pointer;
     transition: color .25s ease;
     font-size: 18px;
     font-weight: 600;
 }
+.cart-icon {
+    color: #FFD700;
+    transition: color .25s ease;
+}
 
-.phone:hover {
-    color: #ffffff;
+.phone:hover .cart-icon {
+    color: white;
 }
 
 .phone i {
     padding-right: 10px;
     font-size: 20px;
+    vertical-align: middle;
 }
 @media (max-width: 575.98px) {
     #header .logo {
         padding-left: 5px;
     }
 
-    #header .phone {
-        display: none;
-    }
+
 
     #header .mobile-menu-btn {
         padding-right: 5px;
@@ -1062,6 +1107,83 @@ input::-ms-input-placeholder {
 /* ----------------- Booking Style ----------------- */
 /* ================================================= */
 
+/*debut*/
+.custom-select1 {
+  position: relative;
+  display: inline-block;
+}
+
+.custom-select1 select {
+  width: 100%;
+  padding: 8px 10px 5px 10px;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #495057;
+  background-color: #fff;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  appearance: none;
+}
+
+.custom-select1::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 6px solid #495057;
+}
+
+.custom-select1 select:focus {
+  outline: none;
+  border-color: #80bdff;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+.custom-select2 {
+  position: relative;
+  display: inline-block;
+}
+
+.custom-select2 select {
+  width: 250px;
+  padding: 8px 10px 5px 10px;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #495057;
+  background-color: #fff;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  appearance: none;
+}
+
+.custom-select2::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 6px solid #495057;
+}
+
+.custom-select2 select:focus {
+  outline: none;
+  border-color: #80bdff;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+
+
+
+/*fin*/
+
 #booking {
     position: relative;
     padding: 45px 0 60px 0;
@@ -1077,7 +1199,7 @@ input::-ms-input-placeholder {
 }
 
 #booking .form-control {
-    height: 35px;
+    height: 50px;
     border: 1px solid #ddd;
     border-radius: 0;
     line-height: 24px;
