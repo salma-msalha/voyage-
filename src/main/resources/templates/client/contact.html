@@ -1,0 +1,64 @@
+<div th:insert="~{client/header.html}"></div>
+        <!-- Header Section End -->
+        
+        <!-- Contact Section Start -->
+        <div id="contact">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Contact</h2>
+                    <p>
+                        Nous serions ravis de vous entendre ! Si vous avez des questions, des commentaires ou des demandes spécifiques, n'hésitez pas à nous contacter. Notre équipe dévouée est là pour vous aider et vous fournir les informations dont vous avez besoin. Vous pouvez nous joindre par téléphone, par e-mail ou en remplissant le formulaire de contact ci-dessous. Nous nous efforcerons de vous répondre dans les plus brefs délais. Votre satisfaction est notre priorité et nous sommes impatients de vous offrir une expérience exceptionnelle. Merci de nous faire confiance et de nous donner l'opportunité de vous servir.
+                    </p>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="row contact-info">
+
+                            <div class="col-md-5">
+                                <div class="info-item">
+                                    <p><i class="fa fa-envelope"></i> <a href="mailto:voyage.mail.2023@gmail.com">voyage.mail.2023@gmail.com</a></p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="info-item">
+                                    <p><i class="fa fa-phone"></i><a href="tel:+0523897645">0523897645</a></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="contact-form">
+                            <div id="success"></div>
+                            <form name="sentMessage" id="contactForm" novalidate="novalidate">
+                                <div class="form-row">
+                                    <div class="control-group col-sm-6">
+                                        <label>Nom</label>
+                                        <input type="text" class="form-control" id="name" placeholder="exemple : nouhaila tabia" required="required" data-validation-required-message="Please enter your name" />
+                                        <p class="help-block text-danger"></p>
+                                    </div>
+                                    <div class="control-group col-sm-6">
+                                        <label>Email</label>
+                                        <input type="email" class="form-control" id="email" placeholder="email@example.com" required="required" data-validation-required-message="Please enter your email" />
+                                        <p class="help-block text-danger"></p>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label>Sujet</label>
+                                    <input type="text" class="form-control" id="subject" placeholder="votre sujet " required="required" data-validation-required-message="Please enter a subject" />
+                                    <p class="help-block text-danger"></p>
+                                </div>
+                                <div class="control-group">
+                                    <label>Message</label> 
+                                    <textarea class="form-control" id="message" rows="5" placeholder="Veuillez entrer votre message" required="required" data-validation-required-message="Please enter your message"></textarea>
+                                    <p class="help-block text-danger"></p>
+                                </div>
+                                <div class="button"><button type="submit" id="sendMessageButton">Envoyer</button></div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Contact Section End -->
+        
+      <div th:insert="~{client/footer.html}"></div>

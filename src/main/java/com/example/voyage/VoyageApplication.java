@@ -7,12 +7,14 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ComponentScan;
 
 import java.io.IOException;
 import java.util.Date;
 import java.util.Scanner;
 
 @SpringBootApplication
+@ComponentScan(basePackages = {"com.example.Controller"})
 public class VoyageApplication {
 
 	public static void main(String[] args) throws IOException {
