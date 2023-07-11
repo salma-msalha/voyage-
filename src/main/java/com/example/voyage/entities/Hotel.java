@@ -21,6 +21,6 @@ public class Hotel {
     private String site;
     private String email;
     private String tel;
-    @OneToMany(mappedBy = "Hotel")
-    private List<Chambre> Chambres;
+    @OneToMany
+    private List<Reservation> reservations;
 }

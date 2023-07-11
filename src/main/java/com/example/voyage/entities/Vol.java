@@ -28,10 +28,9 @@ public class Vol {
     private int N_place;
     private Double prix_achat;
     private Double prix_vente;
-    @OneToMany(mappedBy = "vol")
-    private List<Pack> packs;
+    @ManyToOne
+    private Client Client;
     @OneToMany
     private List<Reservation> reservations;
-    @ManyToMany(mappedBy = "vols")
-    private Set<Visiteur> visiteurs= new HashSet<>();
+    
 }

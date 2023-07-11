@@ -21,18 +21,16 @@ public class Reservation {
     @ManyToOne
     private Client Client;
     @ManyToOne
-    private Administrateur Admin;
-    @ManyToOne
     private Vol vol;
     @ManyToOne
-    private Pack pack;
-    @OneToMany (mappedBy = "Reservation")
-    private List<Chambre> Chambres;
+    private Hotel hotel;
+   
+    
    // @ManyToMany(mappedBy = "reservations")
    // private Set<Transport> transports= new HashSet<>();
-    @ManyToMany(mappedBy = "reservations")
-    private Set<Service> services= new HashSet<>();
-    @OneToMany(mappedBy = "Reserv")
+   @OneToMany(mappedBy = "Reserv")
     private List<Facture> factures;
+    
+    
 
 }
