@@ -24,6 +24,7 @@ public class Reservation {
     private Vol vol;
     @ManyToOne
     private Hotel hotel;
+
    
     
    // @ManyToMany(mappedBy = "reservations")

@@ -3,12 +3,14 @@ package com.example.voyage;
 import ch.qos.logback.core.CoreConstants;
 import ch.qos.logback.core.net.SyslogOutputStream;
 import com.example.voyage.entities.Client;
-import com.example.voyage.entities.Compte;
 import com.example.voyage.entities.Hotel;
+import com.example.voyage.repository.HotelRepository;
+import com.example.voyage.services.imp.HotelServiceImp;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
@@ -23,6 +25,8 @@ import java.util.Scanner;
 @SpringBootApplication
 @ComponentScan(basePackages = {"com.example.voyage.Controller" , "com.example.voyage.repository" , "com.example.voyage.services"})
 public class VoyageApplication {
+	@Autowired
+	private static HotelRepository hotelRepository;
 
 	public static void main(String[] args) throws IOException, ParseException {
 		SpringApplication.run(VoyageApplication.class, args);
@@ -65,19 +69,19 @@ public class VoyageApplication {
 		g_ad = scan.nextInt();
 		System.out.print("no_rooms : ");
 		n_r = scan.nextInt();
-		//System.out.print("Veuillez entrez ville d'arrivée : ");
-		//villeA=scan.next();
+		System.out.print("Veuillez entrez ville d'arrivée : ");
+		villeA = scan.next();
 		System.out.print("group_children : ");
 		g_ch = scan.nextInt();
-		//System.out.print("Veuillez entrez ville de départ : ");
-		//villeD=scan.next();
+		System.out.print("Veuillez entrez ville de départ : ");
+		villeD = scan.next();
 		SimpleDateFormat dateFormat = new SimpleDateFormat("YYYY-MM-DD");
-		//System.out.print("Veuillez entrez date de départ : ");
-		//String dateD1=scan.next();
-		//dateD=dateFormat.parse(dateD1);
-		//System.out.print("Veuillez entrez date d'arrivée : ");
-		//String dateA1=scan.next();
-		//dateA=dateFormat.parse(dateA1);
+		System.out.print("Veuillez entrez date de départ : ");
+		String dateD1 = scan.next();
+		dateD = dateFormat.parse(dateD1);
+		System.out.print("Veuillez entrez date d'arrivée : ");
+		String dateA1 = scan.next();
+		dateA = dateFormat.parse(dateA1);
 		checkin = dateFormat.parse(checkin1);
 		checkout = dateFormat.parse(checkout1);
 		Document HdocE1;
@@ -105,37 +109,47 @@ public class VoyageApplication {
 				break;//https://www.booking.com/searchresults.fr.html?ss=Ifrane&ssne=Ifrane&ssne_untouched=Ifrane&label=gen173rf-1BCAEoggI46AdIM1gDaIwBiAEBmAENuAEXyAEV2AEB6AEBiAIBmAIiqAIDuALQxLGlBsACAdICJGU5ZjIwNjI4LWMxNWEtNGQ5Yi05MmZhLWFiMjg2MjNiMTJiNdgCBeACAQ&sid=306db4aa850bb4d03ba16de56aa2fe8b&aid=304142&lang=fr&sb=1&src_elem=sb&src=searchresults&dest_id=-34892&dest_type=city&checkin=2023-08-09&checkout=2023-09-05&group_adults=2&no_rooms=2&group_children=0
 			case "Fès"://https://www.booking.com/searchresults.fr.html?ss=Fès&ssne=Fès&ssne_untouched=Fès&label=fr-iRbsdywwVIW92KCp85hipgS349832748924%3Apl%3Ata%3Ap1%3Ap2%3Aac%3Aap%3Aneg%3Afi%3Atikwd-303403373504%3Alp1009974%3Ali%3Adec%3Adm%3Appccp%3DUmFuZG9tSVYkc2RlIyh9YURcq_26dhSxO_kD28P4Rwg&sid=91eaaf84c9bd8149a1c96dc76ca4a219&aid=1610680&lang=fr&sb=1&src_elem=sb&src=searchresults&dest_id=-32910&dest_type=city&checkin=" + checkin.toString() + "&checkout=" + checkout.toString() + "&group_adults=" + g_ad + "&no_rooms=" + n_r + "&group_children=" + g_ch).get();
 				HdocE1 = Jsoup.connect("https://www.booking.com/searchresults.fr.html?ss=Fès&ssne=Fès&ssne_untouched=Fès&label=gen173rf-1BCAEoggI46AdIM1gDaIwBiAEBmAENuAEXyAEV2AEB6AEBiAIBmAIiqAIDuALQxLGlBsACAdICJGU5ZjIwNjI4LWMxNWEtNGQ5Yi05MmZhLWFiMjg2MjNiMTJiNdgCBeACAQ&sid=306db4aa850bb4d03ba16de56aa2fe8b&aid=304142&lang=fr&sb=1&src_elem=sb&src=searchresults&dest_id=-32910&dest_type=city&checkin=" + checkin.toString() + "&checkout=" + checkout.toString() + "&group_adults=" + g_ad + "&no_rooms=" + n_r + "&group_children=" + g_ch).get();
-						break;//
+				break;//
 			default:
 				System.out.println("ville non trouvée");
 				HdocE1 = Jsoup.connect("https://www.booking.com/searchresults.fr.html?ss=Casablanca&ssne=Casablanca&ssne_untouched=Casablanca&label=fr-iRbsdywwVIW92KCp85hipgS349832748924%3Apl%3Ata%3Ap1%3Ap2%3Aac%3Aap%3Aneg%3Afi%3Atikwd-303403373504%3Alp1009974%3Ali%3Adec%3Adm%3Appccp%3DUmFuZG9tSVYkc2RlIyh9YURcq_26dhSxO_kD28P4Rwg&sid=91eaaf84c9bd8149a1c96dc76ca4a219&aid=1610680&lang=fr&sb=1&src_elem=sb&src=searchresults&dest_id=-28159&dest_type=city&checkin=" + checkin.toString() + "&checkout=" + checkout.toString() + "&group_adults=" + g_ad + "&no_rooms=" + n_r + "&group_children=" + g_ch).get();
 				break;                   // https://www.booking.com/searchresults.fr.html?ss=Casablanca&ssne=Casablanca&ssne_untouched=Casablanca&label=gen173rf-1BCAEoggI46AdIM1gDaIwBiAEBmAENuAEXyAEV2AEB6AEBiAIBmAIiqAIDuALQxLGlBsACAdICJGU5ZjIwNjI4LWMxNWEtNGQ5Yi05MmZhLWFiMjg2MjNiMTJiNdgCBeACAQ&sid=306db4aa850bb4d03ba16de56aa2fe8b&aid=304142&lang=fr&sb=1&src_elem=sb&src=searchresults&dest_id=-28159&dest_type=city&checkin=2023-08-10&checkout=2023-08-11&group_adults=2&no_rooms=1&group_children=0
-				// https://www.booking.com/searchresults.fr.html?ss=Casablaca&ssne=France&ssne_untouched=France&label=gen173rf-1BCAEoggI46AdIM1gDaIwBiAEBmAENuAEXyAEV2AEB6AEBiAIBmAIiqAIDuALQxLGlBsACAdICJGU5ZjIwNjI4LWMxNWEtNGQ5Yi05MmZhLWFiMjg2MjNiMTJiNdgCBeACAQ&sid=306db4aa850bb4d03ba16de56aa2fe8b&aid=304142&lang=fr&sb=1&src_elem=sb&src=searchresults&dest_id=-28159&dest_type=city&ac_position=0&ac_click_type=b&ac_langcode=fr&ac_suggestion_list_length=5&search_selected=true&search_pageview_id=0ffb8c34b17a005a&ac_meta=GhAwZmZiOGMzNGIxN2EwMDVhIAAoATICZnI6CUNhc2FibGFjYUABSgpjYXNhYmxhbmNhUNiOAQ%3D%3D&checkin=2023-08-10&checkout=2023-08-11&group_adults=2&no_rooms=1&group_children=0;
-				// https://www.booking.com/searchresults.fr.html?ss=Casablanca&ssne=Casablanca&ssne_untouched=Casablanca&label=fr-iRbsdywwVIW92KCp85hipgS349832748924%3Apl%3Ata%3Ap1%3Ap2%3Aac%3Aap%3Aneg%3Afi%3Atikwd-303403373504%3Alp1009974%3Ali%3Adec%3Adm%3Appccp%3DUmFuZG9tSVYkc2RlIyh9YURcq_26dhSxO_kD28P4Rwg&sid=91eaaf84c9bd8149a1c96dc76ca4a219&aid=1610680&lang=fr&sb=1&src_elem=sb&src=searchresults&dest_id=-28159&dest_type=city&checkin=2023-09-10&checkout=2023-09-16&group_adults=2&no_rooms=1&group_children=0
+			// https://www.booking.com/searchresults.fr.html?ss=Casablaca&ssne=France&ssne_untouched=France&label=gen173rf-1BCAEoggI46AdIM1gDaIwBiAEBmAENuAEXyAEV2AEB6AEBiAIBmAIiqAIDuALQxLGlBsACAdICJGU5ZjIwNjI4LWMxNWEtNGQ5Yi05MmZhLWFiMjg2MjNiMTJiNdgCBeACAQ&sid=306db4aa850bb4d03ba16de56aa2fe8b&aid=304142&lang=fr&sb=1&src_elem=sb&src=searchresults&dest_id=-28159&dest_type=city&ac_position=0&ac_click_type=b&ac_langcode=fr&ac_suggestion_list_length=5&search_selected=true&search_pageview_id=0ffb8c34b17a005a&ac_meta=GhAwZmZiOGMzNGIxN2EwMDVhIAAoATICZnI6CUNhc2FibGFjYUABSgpjYXNhYmxhbmNhUNiOAQ%3D%3D&checkin=2023-08-10&checkout=2023-08-11&group_adults=2&no_rooms=1&group_children=0;
+			// https://www.booking.com/searchresults.fr.html?ss=Casablanca&ssne=Casablanca&ssne_untouched=Casablanca&label=fr-iRbsdywwVIW92KCp85hipgS349832748924%3Apl%3Ata%3Ap1%3Ap2%3Aac%3Aap%3Aneg%3Afi%3Atikwd-303403373504%3Alp1009974%3Ali%3Adec%3Adm%3Appccp%3DUmFuZG9tSVYkc2RlIyh9YURcq_26dhSxO_kD28P4Rwg&sid=91eaaf84c9bd8149a1c96dc76ca4a219&aid=1610680&lang=fr&sb=1&src_elem=sb&src=searchresults&dest_id=-28159&dest_type=city&checkin=2023-09-10&checkout=2023-09-16&group_adults=2&no_rooms=1&group_children=0
 		}
+		HdocE1 = Jsoup.connect("https://www.booking.com/searchresults.fr.html?ss=Casablanca&ssne=Casablanca&ssne_untouched=Casablanca&label=fr-iRbsdywwVIW92KCp85hipgS349832748924%3Apl%3Ata%3Ap1%3Ap2%3Aac%3Aap%3Aneg%3Afi%3Atikwd-303403373504%3Alp1009974%3Ali%3Adec%3Adm%3Appccp%3DUmFuZG9tSVYkc2RlIyh9YURcq_26dhSxO_kD28P4Rwg&sid=91eaaf84c9bd8149a1c96dc76ca4a219&aid=1610680&lang=fr&sb=1&src_elem=sb&src=searchresults&dest_id=-28159&dest_type=city&checkin=" + checkin.toString() + "&checkout=" + checkout.toString() + "&group_adults=" + g_ad + "&no_rooms=" + n_r + "&group_children=" + g_ch).get();
 
-
-		Elements Hbody = HdocE1.select("div.d4924c9e74");
-		Elements prixTD = Hbody.select("div.b978843432 div.a1b3f50dcd.be36d14cea.f7c6687c3d.f996d8c258");
-		System.out.println(prixTD);
-		/*for (Element e : Hbody.select("div.a826ba81c4.fa2f36ad22.afd256fc79.d08f526e0d.ed11e24d01.ef9845d4b3.da89aeb942")) {
-			String img = e.select("div.f9d4f2568d img").attr("src");//f9d4f2568d c90a25d457 ib9a
+		Elements Hbody = HdocE1.select("div.d4924c9e74");//d20f4628d0 d4924c9e74 a826ba81c4.fa2f36ad22.afd256fc79.d08f526e0d.ed11e24d01.ef9845d4b3.da89aeb942
+		String titre = null;
+		String desc = null;
+		String img = null;
+		for (Element e : Hbody.select("div.a826ba81c4.fa2f36ad22.afd256fc79.d08f526e0d.ed11e24d01.ef9845d4b3.da89aeb942")) {
+			img = e.select("div.f9d4f2568d img").attr("src");
 			System.out.println(img);
-			//Elements prixTD = e.select("div.b978843432 div.a1b3f50dcd.be36d14cea.f7c6687c3d.f996d8c258");
-			String prix = prixTD.select("div.e6e585da68").text();//span.fcab3ed991.fbd1d3018c.e729ed5ab6
+			Elements prixTD = e.select("div.b978843432 div.a1b3f50dcd.be36d14cea.f7c6687c3d.f996d8c258");
+			String prix = prixTD.select("span.e729ed5ab6").text();//span.fcab3ed991.fbd1d3018c.e729ed5ab6 div.e6e585da68
 			System.out.println(prix);
-			String titre = e.select("div.f9d4f2568d img").attr("alt");
+			titre = e.select("div.f9d4f2568d img").attr("alt");
 			System.out.println(titre);
-			String desc = prixTD.select("div.d8eab2cf7f").text();
+			desc = prixTD.select("div.d8eab2cf7f").text();
 			System.out.println(desc);
-			}*/
-		/*String vd=villeD;
-		String va=villeA;
-		Date dd=dateD;
-		Date da=dateA;
-		System.out.println("vd : "+vd+" va :"+va+" dd :"+dd+" da :"+da);
 
-		String url = "https://booking.kayak.com/flights/"+vd+"-"+va+"/"+dd.toString()+"/"+da.toString()+"?sort=price_a";
+			Hotel hotel = new Hotel();
+			hotel.setNom_h(titre);
+			hotel.setG_ch(g_ch);
+			hotel.setG_ad(g_ad);
+			hotel.setN_r(n_r);
+			hotel.setDescrip(desc);
+			hotelRepository.save(hotel);
+
+		}
+		String vd = villeD;
+		String va = villeA;
+		Date dd = dateD;
+		Date da = dateA;
+		System.out.println("vd : " + vd + " va :" + va + " dd :" + dd + " da :" + da);
+
+		String url = "https://booking.kayak.com/flights/" + vd + "-" + va + "/" + dd.toString() + "/" + da.toString() + "?sort=price_a";
 		//String url = "https://booking.kayak.com/flights/CMN-PAR/2023-08-08/2023-09-14?sort=price_a";
 
 
@@ -178,9 +192,19 @@ public class VoyageApplication {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-		}*/
+		}
 
-}
+
+		//HotelServiceImp hotelService = new HotelServiceImp(hotelRepository); // Instanciation de la classe HotelServiceImp en lui passant l'instance de HotelRepository
+
+		//Hotel h = new Hotel("trte", 2, 2, 2, 2023-08-08, '2023-08-08', "fsf", "dfsf");
+		//Hotel addedHotel = hotelService.addHotel(h);
+
+
+		//Hotel(String nom_h, int g_ch, int g_ad, int n_r, Date checkin, Date checkout, String descrip, String imag)
+
+	}
+
 
 }
 
