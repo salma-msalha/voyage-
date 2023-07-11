@@ -22,7 +22,7 @@ public class Visiteur {
     @ManyToMany
     private Set<Service> services= new HashSet<>();
     @ManyToMany
-    private Set<Chambre> chambres= new HashSet<>();
+    private Set<Hotel> hotels= new HashSet<>();
     @ManyToMany
     private Set<Vol> vols= new HashSet<>();
 

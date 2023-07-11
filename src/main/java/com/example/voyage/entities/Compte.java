@@ -21,4 +21,10 @@ public class Compte {
     @OneToOne(cascade= CascadeType.ALL)
     @JoinColumn(name="fk_idCA")
     private Administrateur Admin;
+
+    public Compte(int i, String koko, String channel) {
+        this.ID=i;
+        this.Pseudo=koko;
+        this.Mdp=channel;
+    }
 }

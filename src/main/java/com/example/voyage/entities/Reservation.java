@@ -27,7 +27,7 @@ public class Reservation {
     @ManyToOne
     private Pack pack;
     @OneToMany (mappedBy = "Reservation")
-    private List<Chambre> Chambres;
+    private List<Hotel> hotels;
    // @ManyToMany(mappedBy = "reservations")
    // private Set<Transport> transports= new HashSet<>();
     @ManyToMany(mappedBy = "reservations")

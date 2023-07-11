@@ -18,8 +18,8 @@ public class Service {
     @Id@GeneratedValue(strategy = GenerationType.IDENTITY)
     private long ID;
     private String description ;
-    private Double prixAchat;
-    private Double prixVente ;
+    private Double prix;
+    //private Double prixVente ;
     private int qte;
     @OneToMany(mappedBy = "serv")
     private List<Pack> packs;

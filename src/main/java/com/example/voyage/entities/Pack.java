@@ -23,7 +23,7 @@ public class Pack {
     @ManyToOne
     private Vol vol;
     @ManyToOne
-    private Chambre chamb;
+    private Hotel hotel;
     @ManyToOne
     private Service serv;
     @ManyToMany(mappedBy = "packs")

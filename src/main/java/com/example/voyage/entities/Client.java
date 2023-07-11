@@ -29,4 +29,6 @@ public class Client {
     private Compte Compte;
     @OneToMany(mappedBy = "Client")
     private List<Reservation> Reservations;
+
+
 }
