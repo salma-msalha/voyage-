@@ -21,7 +21,7 @@ import java.util.Date;
 import java.util.Scanner;
 
 @SpringBootApplication
-@ComponentScan(basePackages = {"com.example.Controller"})
+@ComponentScan(basePackages = {"com.example.voyage.Controller" , "com.example.voyage.repository" , "com.example.voyage.services"})
 public class VoyageApplication {
 
 	public static void main(String[] args) throws IOException, ParseException {

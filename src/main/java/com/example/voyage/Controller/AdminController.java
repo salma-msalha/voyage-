@@ -1,4 +1,4 @@
-package com.example.Controller;
+package com.example.voyage.Controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -17,11 +17,7 @@ public class AdminController {
 	    }
 	    
 	   
-	    @GetMapping("/clients")
-	    public String clients() {
-	        return "admin/clients";
-	    }
-
+	   
 	    @GetMapping("reservations")
 	    public String reservations() {
 	        return "admin/reservations"; // Le nom de la vue (template) à afficher, sans l'extension
@@ -30,6 +26,17 @@ public class AdminController {
 	    public String reservationsdetails() {
 	        return "admin/reservation-details"; // Le nom de la vue (template) à afficher, sans l'extension
 	    }
+	    
+	    @GetMapping("reservation-vols")
+	    public String reservation_vols() {
+	        return "admin/reservation-vols"; // Le nom de la vue (template) à afficher, sans l'extension
+	    }
+	    
+	    @GetMapping("reservations-vol-details")
+	    public String reservation1_vols_details() {
+	        return "admin/reservations-vol-details"; // Le nom de la vue (template) à afficher, sans l'extension
+	    }
+	    
 	
 
 }
