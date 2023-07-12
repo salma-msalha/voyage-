@@ -28,15 +28,19 @@ public class Vol {
     private String Rheured;
     private String Rheurea;
     private String avionA;
+    private String Prix ; 
     private String avionR;
     private String villeA;
     private String villeR;
+    private String prixV;
+    private String durationR;
+    private String durationA;
     @ManyToOne
     private Client Client;
     @OneToMany
     private List<Reservation> reservations;
 
-    public Vol(int NVol, Date dateA, Date dateR, String typeA, String typeB, String aheured, String aheurea, String rheured, String rheurea, String avionA, String avionR, String villeA, String villeR, com.example.voyage.entities.Client client) {
+    public Vol(int NVol, Date dateA, Date dateR, String typeA, String typeB, String aheured, String aheurea, String rheured, String rheurea, String avionA, String avionR, String villeA, String villeR, com.example.voyage.entities.Client client, String prixV, String durationR, String durationA) {
         this.NVol = NVol;
         this.dateA = dateA;
         this.dateR = dateR;
@@ -50,7 +54,36 @@ public class Vol {
         this.avionR = avionR;
         this.villeA = villeA;
         this.villeR = villeR;
-        Client = client;
+        this.Client = client;
+        this.prixV = prixV;
+        this.durationR = durationR;
+        this.durationA = durationA;
+    }
+
+    // ...
+
+    public String getPrix() {
+        return prixV;
+    }
+
+    public void setPrix(String prixV) {
+        this.prixV = prixV;
+    }
+
+    public String getDurationR() {
+        return durationR;
+    }
+
+    public void setDurationR(String durationR) {
+        this.durationR = durationR;
+    }
+
+    public String getDurationA() {
+        return durationA;
+    }
+
+    public void setDurationA(String durationA) {
+        this.durationA = durationA;
     }
 
     public long getID() {
