@@ -11,10 +11,7 @@ public class AdminController {
 	    public String adduser() {
 	        return "admin/ajouter-client"; // Le nom de la vue (template) à afficher, sans l'extension
 	    }
-	    @GetMapping("/modifier-client")
-	    public String modifierclient() {
-	        return "admin/modifier-client"; // Le nom de la vue (template) à afficher, sans l'extension
-	    }
+	    
 	    
 	   
 	   

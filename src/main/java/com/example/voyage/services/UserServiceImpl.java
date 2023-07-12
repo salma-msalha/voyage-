@@ -40,13 +40,20 @@ public class UserServiceImpl implements UserService{
     }
 
     
-    public Client updateClient(Client Client) {
-        Client existingClient = userRepo.findById((long) Client.getId()).orElse(null);
-        existingClient.setNom(Client.getNom());
-        existingClient.setEmail(Client.getEmail());
-        existingClient.setTele(Client.getTele());
-        return userRepo.save(existingClient);
+    @Override
+    public Client updateClient(Client client) {
+        Client existingClient = userRepo.findById(client.getId()).orElse(null);
+        if (existingClient != null) {
+            existingClient.setNom(client.getNom());
+            existingClient.setPrenom(client.getPrenom());
+            existingClient.setN_Cin(client.getN_Cin());
+            existingClient.setEmail(client.getEmail());
+            existingClient.setTele(client.getTele());
+           return userRepo.save(existingClient);
+        }
+        return null; // Gérer le cas où le client n'est pas trouvé
     }
+
 	
 	@Override
     public boolean checkEmail(String email) {

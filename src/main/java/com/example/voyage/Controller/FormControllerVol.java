@@ -1,7 +1,7 @@
 package com.example.voyage.Controller;
 import com.example.voyage.entities.Vol;
 
-import jakarta.servlet.http.HttpSession;
+import javax.servlet.http.HttpSession;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -66,7 +66,7 @@ public class FormControllerVol {
 	            String typeR = part12.select("div.col-field.stops").text();
 	            String durationR = part12.select("div.col-field.duration").text();
 
-	            String prixV = flight.select("div.col-price.result-column.js-no-dtog span.price-text").text();
+	            String prixV = flight.select("div.col-price.result-column.js-no-dtog span.price-text").first().text();
 
 	            results.add(new ResultatScrapingVol(dateA, dateR, typeA, typeR, Aheured, Aheurea, Rheured, Rheurea, avionA, avionR, villeA, villeR, prixV, durationR, durationA));
 	        }

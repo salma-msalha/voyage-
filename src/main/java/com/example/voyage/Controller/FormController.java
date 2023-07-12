@@ -22,30 +22,54 @@ import java.util.List;
 public class FormController {
     @PostMapping("/rechercher")
     public ModelAndView rechercher(@RequestParam String ville, 
-                                   @RequestParam Date checkin, 
-                                   @RequestParam Date checkout, 
-                                   @RequestParam int g_ad, 
-                                   @RequestParam int n_r, 
-                                   @RequestParam int g_ch,
-                                   HttpSession session) {
-    	
-    	
+            @RequestParam Date checkin, 
+            @RequestParam Date checkout, 
+            @RequestParam int g_ad, 
+            @RequestParam int n_r, 
+            @RequestParam int g_ch,
+            HttpSession session) {
+
+    	String des_id;
         try {
-            Document HdocE1 = Jsoup.connect("https://www.booking.com/searchresults.fr.html?ss=" + ville + "&ssne=" + ville + "&ssne_untouched=" + ville + "&label=gog235jc-1DCAEoggI46AdIDVgDaIwBiAEBmAENuAEXyAEV2AED6AEB-AECiAIBqAIDuAL0qoylBsACAdICJGI2MjgyYjY1LTlmOWQtNDAxMS05YjY2LWFjNzU0ZGVkNTczONgCBOACAQ&aid=397594&lang=fr&sb=1&src_elem=sb&src=searchresults&dest_id=-38833&dest_type=city&checkin=" + checkin + "&checkout=" + checkout + "&group_adults=" + g_ad + "&no_rooms=" + n_r + "&group_children=" + g_ch).get();
+            
+		switch (ville) {
+			case "Marrakech": des_id = "-38833"; break;
+			case "Casablanca":  des_id = "-28159";  break;
+			case "Tanger": des_id = "-51554"; break;
+			case "Agadir": des_id = "-20029"; break;
+			case "Essaouira": des_id = "-32532"; break;
+			case "Rabat": des_id = "-43376"; break;
+		    case "Ifran": des_id = "-34892"; break;
+		    case "Fès": des_id = "-32910"; break;
+			case "Paris": des_id = "-1456928"; break;
+			case "Dubaï": des_id = "-782831"; break;
+		    case "Singapour": des_id = "-73635"; break;
+		    case "New York": des_id = "20088325"; break;
+		    case "Istanbul": des_id = "-755070"; break;
+		    case "Londres": des_id = "-2601889"; break;
+		    case "Tokyo": des_id = "-246227"; break;
+		    case "Barcelone": des_id = "-372490"; break;
+		    case "Berlin": des_id = "-1746443"; break;
+		    
+			default:
+				des_id=" "; break;
+	}
+            Document HdocE1 = Jsoup.connect("https://www.booking.com/searchresults.fr.html?ss=" + ville + "&ssne=" + ville + "&ssne_untouched=" + ville + "&label=gog235jc-1DCAEoggI46AdIDVgDaIwBiAEBmAENuAEXyAEV2AED6AEB-AECiAIBqAIDuAL0qoylBsACAdICJGI2MjgyYjY1LTlmOWQtNDAxMS05YjY2LWFjNzU0ZGVkNTczONgCBOACAQ&aid=397594&lang=fr&sb=1&src_elem=sb&src=searchresults&dest_id="+des_id+"&dest_type=city&checkin=" + checkin + "&checkout=" + checkout + "&group_adults=" + g_ad + "&no_rooms=" + n_r + "&group_children=" + g_ch).get();
             Elements Hbody = HdocE1.select("div.d4924c9e74");
+			// Créer une liste de résultats du scraping
+			List<ResultatScraping> results = new ArrayList<>();
+			for (Element e : Hbody.select("div.a826ba81c4.fa2f36ad22.afd256fc79.d08f526e0d.ed11e24d01.ef9845d4b3.da89aeb942")) {
+			String img = e.select("div.f9d4f2568d img").attr("src");
+			String titre = e.select("div.f9d4f2568d img").attr("alt");
+			String desc = e.select("div.d8eab2cf7f").text();
+			String prix = "";
+			Element priceElement = e.selectFirst("span.fcab3ed991.fbd1d3018c.e729ed5ab6");
+			if (priceElement != null) {
+			    prix = priceElement.text();
+			}
 
-            // Créer une liste de résultats du scraping
-            List<ResultatScraping> results = new ArrayList<>();
-            for (Element e : Hbody.select("div.a826ba81c4.fa2f36ad22.afd256fc79.d08f526e0d.ed11e24d01.ef9845d4b3.da89aeb942")) {
-                String img = e.select("div.f9d4f2568d img").attr("src");
-                String titre = e.select("div.f9d4f2568d img").attr("alt");
-                String desc = e.select("div.d8eab2cf7f").text();
-                Element priceElement = e.selectFirst("span.fcab3ed991.fbd1d3018c.e729ed5ab6");
-                String prix = priceElement.text();
-
-
-                results.add(new ResultatScraping(img, desc, titre, prix, checkin, checkout, g_ad, g_ch, n_r));
-            }
+			results.add(new ResultatScraping(img, desc, titre, prix, checkin, checkout, g_ad, g_ch, n_r));
+			}
 
            
             

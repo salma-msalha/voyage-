@@ -9,16 +9,51 @@
                     <div class="control-group col-md-3">
                         <div class="form-row">
                             <div class="control-group col-md-6">
-                                <label for="ville-depart">Ville de départ</label>
-                                <div class="custom-select1">
-                                    <input id="ville-depart" name="villeR"></input>
+                                <label>ville de départ</label>
+                                 <div class="custom-select2">
+                        <select class="custom-select1" name="villeR">
+                            <option value="CMN">Casablanca</option>
+                            <option value="RAK">Marrakech</option>
+                            <option value="TNG">Tanger</option>
+                            <option value="AGA">Agadir</option>
+                            <option value="FEZ">Fès</option>
+                            <option value="ESU">Essaouira</option>
+                            <option value="RBA">Rabat</option>
+                            <option value="PAR">Paris</option>
+                            <option value="SIN">Singapour</option>
+                            <option value="NYC">New York</option>
+                            <option value="IST">Instanbul</option>
+                            <option value="LON">Londres</option>
+                            <option value="TYO">Tokyo</option>
+                            <option value="BCN">Barcelone</option>
+                            <option value="BER">Berlin</option>
+                        </select>
+                                 </div>
+
+
                     </div>
                             </div>
                             <div class="control-group col-md-6">
-                                <label for="ville-arrivee">Ville d'arrivée</label>
-                                <div class="custom-select1">
-                                    <input id="ville-arrivee" name="villeA"></input>                          </div>
-                            </div>
+                               <label>ville d' arrivée</label>
+                                <div class="custom-select2">
+                        <select class="custom-select2" name="villeA">
+                            <option value="CMN">Casablanca</option>
+                            <option value="RAK">Marrakech</option>
+                            <option value="TNG">Tanger</option>
+                            <option value="AGA">Agadir</option>
+                            <option value="FEZ">Fès</option>
+                            <option value="ESU">Essaouira</option>
+                            <option value="RBA">Rabat</option>
+                            <option value="PAR">Paris</option>
+                            <option value="SIN">Singapour</option>
+                            <option value="NYC">New York</option>
+                            <option value="IST">Instanbul</option>
+                            <option value="LON">Londres</option>
+                            <option value="TYO">Tokyo</option>
+                            <option value="BCN">Barcelone</option>
+                            <option value="BER">Berlin</option>
+                        </select>
+                                </div>
                         </div>
                     </div>
  
@@ -74,11 +109,11 @@
                                     <div class="box12">
                                         <img src="client/img/room/room-1.jpg">
                                         <div class="box-content">
-                                            <h3 class="title">Standard Single</h3>
+                                            <h3 class="title" th:value="${result.villeA}" ></h3>
                                             <label for="ville-depart">Ville de départ</label>
-<div class="custom-select1">
-    <input id="ville-depart" name="villeA" th:value="${result.villeA}" readonly></input>
-</div>
+												<div class="custom-select1">
+												    <input id="ville-depart" name="villeA" th:value="${result.villeA}" readonly></input>
+												</div>
 
                                             <ul class="icon">
                                                 <li><a href="#" data-toggle="modal" data-target="#modal-id"><i class="fa fa-link"></i></a></li>
@@ -89,8 +124,8 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="room-des">
-                                    <h3><a href="#" data-toggle="modal" data-target="#modal-id">Standard Single</a></h3>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                  <h3><a href="#" data-toggle="modal" th:text="${result.villeR}+' vers ' + ${result.villeA}" th:attr="data-target='#modal-' + ${result.villeR}"></a></h3>
+
                                     <ul class="room-size">
                                         <li><i class="fa fa-arrow-right"></i>Size: 260 sq ft </li>
                                         <li><i class="fa fa-arrow-right"></i>Beds: 2 Single(s) </li>
@@ -112,7 +147,7 @@
                             <div class="col-md-3">
                                 <div class="room-rate">
                                     <h3>From</h3>
-                                    <h1>$150</h1>
+                                     <h2 th:text="${result.prixV}"></h2>
                                     <a href="#">Book Now</a>
                                 </div>
                             </div>

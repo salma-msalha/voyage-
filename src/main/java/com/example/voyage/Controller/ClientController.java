@@ -5,7 +5,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -18,6 +21,7 @@ import com.example.voyage.entities.Client;
 import com.example.voyage.services.UserService;
 import ch.qos.logback.classic.Logger;
 import ch.qos.logback.classic.LoggerContext;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class ClientController {
@@ -127,10 +131,36 @@ public class ClientController {
 	        return userService.getClientByName(nom);
 	    }
 	 
-	 @PutMapping("/updateClient/{id}")
-		public Client updateclient_admin (@RequestBody Client client) {
-			return userService.updateClient(client) ;
-		}
+	 @PostMapping("/updateClient/{id}")
+	 public String updateClient(@PathVariable("id") long clientId, @ModelAttribute("client") @Validated Client updatedClient, BindingResult bindingResult, HttpSession session) {
+	     if (bindingResult.hasErrors()) {
+	         // Gérer les erreurs de validation
+	     }
+	     
+	     Client existingClient = userService.getClientById(clientId);
+	     if (existingClient != null) {
+	         existingClient.setNom(updatedClient.getNom());
+	         existingClient.setPrenom(updatedClient.getPrenom());
+	         existingClient.setEmail(updatedClient.getEmail());
+	         existingClient.setN_Cin(updatedClient.getN_Cin());
+	         existingClient.setTele(updatedClient.getTele());
+
+	         userService.updateClient(existingClient);
+	         session.setAttribute("message", "Client modifié avec succès!");
+	     }
+
+	     return "redirect:/Clients";
+	 }
+
+
+	 @GetMapping("/modifierClient/{id}")
+	 public String showUpdateForm(@PathVariable("id") long clientId, Model model) {
+	     Client client = userService.getClientById(clientId);
+	     model.addAttribute("client", client);
+	     return "admin/modifier-client";
+	 }
+
+
 	 
 	 @Transactional
 		@GetMapping("/delete/{id}")
