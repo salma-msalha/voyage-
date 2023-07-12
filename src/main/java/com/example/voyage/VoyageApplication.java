@@ -5,7 +5,7 @@ import ch.qos.logback.core.net.SyslogOutputStream;
 import com.example.voyage.entities.Client;
 import com.example.voyage.entities.Hotel;
 import com.example.voyage.repository.HotelRepository;
-import com.example.voyage.services.imp.HotelServiceImp;
+
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -30,6 +30,7 @@ public class VoyageApplication {
 
 	public static void main(String[] args) throws IOException, ParseException {
 		SpringApplication.run(VoyageApplication.class, args);
+		/*
 		System.out.println("hello");
 		Scanner scan = new Scanner(System.in);
 		//checkin=2023-07-05&checkout=2023-07-06&group_adults=2&no_rooms=1&group_children=0
@@ -47,7 +48,7 @@ public class VoyageApplication {
 		LocalTime Aheurea;
 		LocalTime Rheured;
 		LocalTime Rheurea;*/
-		String typeA;
+		/*String typeA;
 		String typeR;
 		String avionA;
 		String avionR;
@@ -203,7 +204,7 @@ public class VoyageApplication {
 
 		//Hotel(String nom_h, int g_ch, int g_ad, int n_r, Date checkin, Date checkout, String descrip, String imag)
 
-	}
+	*/}
 
 
 }

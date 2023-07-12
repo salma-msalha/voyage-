@@ -23,8 +23,9 @@ public class UserServiceImpl implements UserService{
     public List<Client> getClients() {
         return userRepo.findAll();
     }
+   
 
-    public Client getClientById(int id) {
+    public Client getClientById(long id) {
         return userRepo.findById(id).orElse(null);
     }
 
@@ -33,13 +34,14 @@ public class UserServiceImpl implements UserService{
     }
    
 
-    public String deleteClient(int id) {
+    public String deleteClient(Long id) {
         userRepo.deleteById(id);
         return "Client removed !! " + id;
     }
 
+    
     public Client updateClient(Client Client) {
-        Client existingClient = userRepo.findById((int) Client.getId()).orElse(null);
+        Client existingClient = userRepo.findById((long) Client.getId()).orElse(null);
         existingClient.setNom(Client.getNom());
         existingClient.setEmail(Client.getEmail());
         existingClient.setTele(Client.getTele());

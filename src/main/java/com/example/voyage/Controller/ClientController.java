@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,19 +13,17 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-
+import javax.servlet.http.HttpSession;
 import com.example.voyage.entities.Client;
 import com.example.voyage.services.UserService;
-
-import ch.qos.logback.core.model.Model;
-import jakarta.servlet.http.HttpSession;
+import ch.qos.logback.classic.Logger;
+import ch.qos.logback.classic.LoggerContext;
 
 @Controller
-
 public class ClientController {
 
-	 @Autowired
-	 private UserService userService;
+    @Autowired
+    private UserService userService;
 	   
 	 
 	 
@@ -95,18 +94,29 @@ public class ClientController {
     }
 	 
 	 @PostMapping("/addClient")
-	public Client addclient_admin (@RequestBody Client client) {
-		return userService.createUser(client) ;
-	}
-	 
-	
+		public String addclient_admin(@ModelAttribute Client client, HttpSession session) {
+		    System.out.println("hi");
+		    client.setRole("user");
+		    client.setMdp("12345678");
+		    userService.createUser(client);
+		    session.setAttribute("message", "Client ajouté avec succès!");
+		    return "redirect:/Clients";
+		}
 	
 	 @GetMapping("/Clients")
-	 public String readClients(ModelMap model) {
-	     List<Client> clients = userService.getClients();
-	     model.addAttribute("clients", clients);
-	     return "admin/clients";
-	 }
+		public String readClients(ModelMap model, HttpSession session) {
+		    List<Client> clients = userService.getClients();
+		    model.addAttribute("clients", clients);
+
+		    String message = (String) session.getAttribute("message");
+		    if (message != null) {
+		        model.addAttribute("message", message);
+		        session.removeAttribute("message");
+		    }
+
+		    return "admin/clients";
+		}
+
 
 
 
@@ -120,10 +130,20 @@ public class ClientController {
 			return userService.updateClient(client) ;
 		}
 	 
-	 @DeleteMapping("/clients/{id}")
-	 public String deleteclient (@PathVariable int id) {
-		 return userService.deleteClient(id) ;
-	 }
+	 @Transactional
+		@GetMapping("/delete/{id}")
+		public String deleteClient(@PathVariable Long id, HttpSession session) {
+		    userService.deleteClient(id);
+		    session.setAttribute("message", "Client supprimé avec succès!");
+		    return "redirect:/Clients";
+		}
+
+
+
+	 
+	
+
+	
 	 
 }
 

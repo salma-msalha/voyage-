@@ -1,6 +1,6 @@
 package com.example.voyage.Controller;
 
-import ch.qos.logback.core.model.Model;
+import org.springframework.ui.ModelMap;
 import com.example.voyage.entities.Hotel;
 import org.springframework.stereotype.Controller;
 import org.jsoup.Jsoup;
@@ -19,7 +19,7 @@ import java.util.List;
 @Controller
 public class FormController {
     @PostMapping("/rechercher")
-    public ModelAndView rechercher(@RequestBody Hotel entite, Model model) {
+    public ModelAndView rechercher(@RequestBody Hotel entite, ModelMap model) {
         // Récupération des données saisies par le client
         String ville = entite.getVille();
         Date checkin = entite.getCheckin();
@@ -53,7 +53,7 @@ public class FormController {
     }
 
     @GetMapping("/hébergements_résultats")
-    public String hébergements(Model model) {
+    public String hébergements(ModelMap model) {
         // Rien à faire ici, les résultats du scraping sont déjà ajoutés au modèle dans la méthode rechercher
         return "client/hébergements";
     }

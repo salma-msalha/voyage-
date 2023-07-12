@@ -1,6 +1,6 @@
 package com.example.voyage.entities;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -41,7 +41,11 @@ public class Hotel {
         this.imag = imag;
     }
 
-    public String getNom_h() {
+    public Hotel() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public String getNom_h() {
         return nom_h;
     }
 

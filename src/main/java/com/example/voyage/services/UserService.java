@@ -17,7 +17,7 @@ public interface UserService {
 
 	public Client updateClient(Client client);
 
-	public String deleteClient(int id);
+	public String deleteClient(Long id);
 
 	
 
