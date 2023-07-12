@@ -93,15 +93,17 @@ public class ClientController {
         return "redirect:/register";
     }
 	 
+	 @Transactional
 	 @PostMapping("/addClient")
-		public String addclient_admin(@ModelAttribute Client client, HttpSession session) {
-		    System.out.println("hi");
-		    client.setRole("user");
-		    client.setMdp("12345678");
-		    userService.createUser(client);
-		    session.setAttribute("message", "Client ajouté avec succès!");
-		    return "redirect:/Clients";
-		}
+	 public String addclient_admin(@ModelAttribute Client client, HttpSession session) {
+	     System.out.println("hi");
+	     client.setRole("user");
+	     client.setMdp("12345678");
+	     userService.createUser(client);
+	     session.setAttribute("message", "Client ajouté avec succès!");
+	     return "redirect:/Clients";
+	 }
+
 	
 	 @GetMapping("/Clients")
 		public String readClients(ModelMap model, HttpSession session) {
