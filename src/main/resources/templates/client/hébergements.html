@@ -1,4 +1,4 @@
-xmlns:th="http://www.thymeleaf.org"
+
 <div th:insert="~{client/header.html}"></div>
 
 <!-- Search Section Start -->
@@ -59,7 +59,9 @@ xmlns:th="http://www.thymeleaf.org"
     }
   }
 
-  genererOptionsVilles("ville");
+    
+    genererOptionsVilles('ville');
+  
 
 </script>
             <div class="control-group col-md-3">
@@ -155,9 +157,7 @@ xmlns:th="http://www.thymeleaf.org"
     <div class="container">
         <div class="section-header">
             <h2>Nos héberegements</h2>
-            <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in mi libero. Quisque convallis, enim at venenatis tincidunt.
-            </p>
+            
         </div>
         <div class="row">
 			
@@ -169,7 +169,7 @@ xmlns:th="http://www.thymeleaf.org"
                             <div class="box12">
                                 <img th:src="${result.img}">
                                 <div class="box-content">
-                                    <h3 class="title" th:text="${client.titre}"> </h3>
+                                    <h3 class="title" > </h3>
                                     <ul class="icon">
                                         <li><a href="#" data-toggle="modal" data-target="#modal-id"><i class="fa fa-link"></i></a></li>
                                     </ul>
@@ -179,12 +179,13 @@ xmlns:th="http://www.thymeleaf.org"
                     </div>
                     <div class="col-md-6">
                         <div class="room-des">
-                            <h3><a href="#" data-toggle="modal" data-target="#modal-id">Standard Single</a></h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                            <h3><a href="#" data-toggle="modal" th:text="${result.nom_h}"data-target="#modal-id"></a></h3>
+                            <p th:text="${result.descrip}"></p>
+                            <!--
                             <ul class="room-size">
                                 <li><i class="fa fa-arrow-right"></i>Size: 260 sq ft </li>
                                 <li><i class="fa fa-arrow-right"></i>Beds: 2 Single(s) </li>
-                            </ul>
+                            </ul> !-->
                             <ul class="room-icon">
                                 <li class="icon-1"></li>
                                 <li class="icon-2"></li>
@@ -202,13 +203,14 @@ xmlns:th="http://www.thymeleaf.org"
                     <div class="col-md-3">
                         <div class="room-rate">
                             <h3>From</h3>
-                            <h1>$150</h1>
+                            <h2 th:text="${result.prix}"></h2>
                             <a href="#">Book Now</a>
                         </div>
                     </div>
                 </div>
                 <hr>
             </div>
+			 </div>
 
 
            

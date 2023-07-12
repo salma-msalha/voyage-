@@ -23,6 +23,7 @@ public class Hotel {
     private int g_ch;
     private int g_ad;
     private int n_r;
+    private String prix  ; 
     private Date checkin;
     private Date checkout;
     private String descrip;

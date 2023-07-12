@@ -4,13 +4,33 @@ import java.util.Date;
 
 public class ResultatScraping {
     private String img;
-    private String desc;
+    private String nom_h;
     private String titre;
     private Date checkin;
     private Date checkout;
     private int g_ad;
+    private String prix  ;
     private int g_ch;
     private int n_r;
+	public String getNom_h() {
+		return nom_h;
+	}
+
+	public void setNom_h(String nom_h) {
+		this.nom_h = nom_h;
+	}
+
+	public String getDescrip() {
+		return descrip;
+	}
+
+	public void setDescrip(String descrip) {
+		this.descrip = descrip;
+	}
+
+
+
+	private String descrip;
 
     public String getImg() {
         return img;
@@ -28,7 +48,15 @@ public class ResultatScraping {
         this.titre = titre;
     }
 
-    public Date getCheckin() {
+    public String getPrix() {
+		return prix;
+	}
+
+	public void setPrix(String prix) {
+		this.prix = prix;
+	}
+
+	public Date getCheckin() {
         return checkin;
     }
 
@@ -70,10 +98,11 @@ public class ResultatScraping {
 
 
 
-    public ResultatScraping(String img,String desc ,String titre, Date checkin, Date checkout, int g_ad, int g_ch, int n_r) {
+    public ResultatScraping(String img,String desc ,String titre, String  prix, Date checkin, Date checkout, int g_ad, int g_ch, int n_r) {
         this.img = img;
-        this.desc=desc;
-        this.titre = titre;
+        this.descrip=desc;
+        this.prix = prix ;
+        this.nom_h = titre;
         this.checkin = checkin;
         this.checkout = checkout;
         this.g_ad = g_ad;
