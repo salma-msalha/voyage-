@@ -31,6 +31,84 @@ public class Reservation {
    // private Set<Transport> transports= new HashSet<>();
    @OneToMany(mappedBy = "Reserv")
     private List<Facture> factures;
+
+
+
+public long getID() {
+	return ID;
+}
+
+
+
+public void setID(long iD) {
+	ID = iD;
+}
+
+
+
+public Date getDate_reservation() {
+	return date_reservation;
+}
+
+
+
+public void setDate_reservation(Date date_reservation) {
+	this.date_reservation = date_reservation;
+}
+
+
+
+public Client getClient() {
+	return Client;
+}
+
+
+
+public void setClient(Client client) {
+	Client = client;
+}
+
+
+
+public Vol getVol() {
+	return vol;
+}
+
+
+
+public void setVol(Vol vol) {
+	this.vol = vol;
+}
+
+
+
+public Hotel getHotel() {
+	return hotel;
+}
+
+
+
+public void setHotel(Hotel hotel) {
+	this.hotel = hotel;
+}
+
+
+
+public List<Facture> getFactures() {
+	return factures;
+}
+
+
+
+public void setFactures(List<Facture> factures) {
+	this.factures = factures;
+}
+
+
+
+
+
+
     
     
 

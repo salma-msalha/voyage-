@@ -45,7 +45,7 @@ public class FormControllerVol {
 	        String encodedDateR = URLEncoder.encode(formattedDateR, "UTF-8");
 
 	        String url = "https://booking.kayak.com/flights/" + villeR + "-" + villeA + "/" + encodedDateA + "/" + encodedDateR + "?sort=price_a";
-	        System.out.println(url) ; 
+	        //System.out.println(url) ; 
 	        Document HdocE2 = Jsoup.connect(url).get();
 	        Elements flights = HdocE2.select("div.resultInner");
 

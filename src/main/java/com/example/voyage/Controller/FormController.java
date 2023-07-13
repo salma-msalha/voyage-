@@ -2,7 +2,8 @@ package com.example.voyage.Controller;
 
 import org.springframework.ui.ModelMap;
 import com.example.voyage.entities.Hotel;
-
+import com.example.voyage.entities.Client ;
+import com.example.voyage.entities.Reservation;
 import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.jsoup.Jsoup;
@@ -17,6 +18,13 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Date;
+
 
 @Controller
 public class FormController {
@@ -70,14 +78,10 @@ public class FormController {
 		    }
 
 		    // Créer un objet ResultatScraping avec les données extraites
-		    ResultatScraping resultat = new ResultatScraping(img, desc, titre, prix, checkin, checkout, g_ad, g_ch, n_r);
+		    ResultatScraping resultat = new ResultatScraping(img, desc, titre, prix, checkin, checkout, g_ad, g_ch, n_r , ville);
 		    results.add(resultat);
 		}
 
-
-
-           
-            
             // Set the results attribute in the session
             session.setAttribute("results", results);
 
@@ -101,4 +105,93 @@ public class FormController {
         // Retourner la vue
         return "client/hébergements";
     }
+    
+    @PostMapping ("/stocker_hotel_reservation")
+    public String stockerHotelReservation(@RequestParam String nom_h,
+                                                @RequestParam String ville,
+                                                @RequestParam int g_ch,
+                                                @RequestParam int g_ad,
+                                                @RequestParam int n_r,
+                                                @RequestParam String prix,
+                                                @RequestParam Date checkin,
+                                                @RequestParam Date checkout,
+                                                @RequestParam String descrip,
+                                                @RequestParam String img,
+                                                HttpSession session) {    // Le reste du code reste inchangé
+    	
+    	int clientId = (int) session.getAttribute("clientId");
+    Connection connection = null;
+        PreparedStatement hotelStatement = null;
+        PreparedStatement reservationStatement = null;
+
+        try {
+            // Établir la connexion à la base de données
+            connection = DriverManager.getConnection("url_de_connexion", "nom_utilisateur", "mot_de_passe");
+
+            // Insérer l'hôtel
+            String insertHotelQuery = "INSERT INTO hotel (nom_h, ville, g_ch, g_ad, n_r, prix, checkin, checkout, descrip, img) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            hotelStatement = connection.prepareStatement(insertHotelQuery);
+            hotelStatement.setString(1, nom_h);
+            hotelStatement.setString(2, ville);
+            hotelStatement.setInt(3, g_ch);
+            hotelStatement.setInt(4, g_ad);
+            hotelStatement.setInt(5, n_r);
+            hotelStatement.setString(6, prix);
+            hotelStatement.setDate(7, new java.sql.Date(checkin.getTime()));
+            hotelStatement.setDate(8, new java.sql.Date(checkout.getTime()));
+            hotelStatement.setString(9, descrip);
+            hotelStatement.setString(10, img);
+            hotelStatement.executeUpdate();
+
+            // Récupérer l'ID de l'hôtel inséré
+            int hotelId;
+            ResultSet generatedKeys = hotelStatement.getGeneratedKeys();
+            if (generatedKeys.next()) {
+                hotelId = generatedKeys.getInt(1);
+            } else {
+                throw new SQLException("Échec de la récupération de l'ID de l'hôtel.");
+            }
+
+            // Insérer la réservation
+            String insertReservationQuery = "INSERT INTO reservation (date_reservation, hotel_id, client_id) VALUES (?, ?, ?)";
+            reservationStatement = connection.prepareStatement(insertReservationQuery);
+            reservationStatement.setDate(1, new java.sql.Date(System.currentTimeMillis()));
+            reservationStatement.setInt(2, hotelId);
+            
+			reservationStatement.setInt(3, clientId);
+            reservationStatement.executeUpdate();
+
+            System.out.println("L'hôtel et la réservation ont été stockés avec succès.");
+        } catch (SQLException e) {
+            System.out.println("Une erreur s'est produite lors du stockage de l'hôtel et de la réservation : " + e.getMessage());
+        } finally {
+            // Fermer les ressources
+            if (reservationStatement != null) {
+                try {
+					reservationStatement.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+            }
+            if (hotelStatement != null) {
+                try {
+					hotelStatement.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+            }
+            if (connection != null) {
+                try {
+					connection.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+            }
+        }
+        
+        return "redirect:/réservations";
+}
 }

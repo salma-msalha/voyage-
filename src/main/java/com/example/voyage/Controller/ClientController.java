@@ -188,9 +188,10 @@ else {
 	     Client utilisateur = userService.getByEmail(email);
 	     if (utilisateur != null && utilisateur.getMdp().equals(password)) {
 	         String role = utilisateur.getRole();
+	         Long clientId =utilisateur.getId();
 	         
 	         session.setAttribute("loggedIn", true);
-	         
+	         session.setAttribute("clientId", clientId);
 	         if (role.equals("admin")) {
 	        	 return "redirect:/Clients"; // Rediriger vers le tableau de bord de l'administrateur
 	         } else if (role.equals("user")) {

@@ -190,11 +190,44 @@ var villes = [
                         </div>
                     </div>
                     <div class="col-md-3">
-                        <div class="room-rate">
-                            <h3>Prix</h3>
-                            <h2 th:text="${result.prix}"></h2>
-                            <a href="#">Book Now</a>
-                        </div>
+                   <div class="room-rate">
+    <h3>Prix</h3>
+    <h2 th:text="${result.prix}"></h2>
+    <a onclick="bookNow('${result.checkin}', '${result.checkout}')" class="book-now-link">Book Now</a>
+
+</div>
+<script>
+    function bookNow(checkin, checkout) {
+        fetch('/stocker_hotel_reservation', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: new URLSearchParams({
+                nom_h: "${result.nom_h}",
+                ville: "${result.ville}",
+                g_ch: 1,
+                g_ad: 2,
+                n_r: 1,
+                prix: "${result.prix}",
+                checkin: new Date(checkin).toISOString(),
+                checkout: new Date(checkout).toISOString(),
+                descrip: "${result.descrip}",
+                img: "${result.img}"
+            })
+        }).then(response => {
+            // Handle the response as needed
+        }).catch(error => {
+            // Handle the error as needed
+        });
+    }
+</script>
+
+
+
+
+
+
                     </div>
                 </div>
                 <hr>

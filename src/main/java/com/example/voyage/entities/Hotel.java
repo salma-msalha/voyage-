@@ -21,11 +21,44 @@ public class Hotel {
     private String nom_h;
     private String ville;
     private int g_ch;
-    private int g_ad;
+    private String img ; 
+    public String getImg() {
+		return img;
+	}
+
+	public void setImg(String img) {
+		this.img = img;
+	}
+
+	private int g_ad;
     private int n_r;
     private String prix  ; 
     private Date checkin;
-    private Date checkout;
+    public long getId_hotel() {
+		return id_hotel;
+	}
+
+	public void setId_hotel(long id_hotel) {
+		this.id_hotel = id_hotel;
+	}
+
+	public String getPrix() {
+		return prix;
+	}
+
+	public void setPrix(String prix) {
+		this.prix = prix;
+	}
+
+	public List<Reservation> getReservations() {
+		return reservations;
+	}
+
+	public void setReservations(List<Reservation> reservations) {
+		this.reservations = reservations;
+	}
+
+	private Date checkout;
     private String descrip;
     private String imag;
 

@@ -16,6 +16,14 @@ public class ResultatScraping {
 		return nom_h;
 	}
 
+	public String getVille() {
+		return ville;
+	}
+
+	public void setVille(String ville) {
+		this.ville = ville;
+	}
+
 	public void setNom_h(String nom_h) {
 		this.nom_h = nom_h;
 	}
@@ -31,6 +39,7 @@ public class ResultatScraping {
 
 
 	private String descrip;
+	private String ville;
 
     public String getImg() {
         return img;
@@ -98,7 +107,7 @@ public class ResultatScraping {
 
 
 
-    public ResultatScraping(String img,String desc ,String titre, String  prix, Date checkin, Date checkout, int g_ad, int g_ch, int n_r) {
+    public ResultatScraping(String img,String desc ,String titre, String  prix, Date checkin, Date checkout, int g_ad, int g_ch, int n_r, String ville) {
         this.img = img;
         this.descrip=desc;
         this.prix = prix ;
@@ -108,6 +117,7 @@ public class ResultatScraping {
         this.g_ad = g_ad;
         this.g_ch = g_ch;
         this.n_r = n_r;
+        this.ville = ville;
     }
 
 
