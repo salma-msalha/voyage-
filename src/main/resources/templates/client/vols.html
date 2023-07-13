@@ -100,64 +100,64 @@
                     <h2>Nos vols</h2>
                     
                 </div>
-                <div class="row">
-					 <div th:each="result : ${results}">
-                    <div class="col-md-12">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <div class="room-img">
-                                    <div class="box12">
-                                        <img src="client/img/room/room-1.jpg">
-                                        <div class="box-content">
-                                            <h3 class="title" th:value="${result.villeA}" ></h3>
-                                            <label for="ville-depart">Ville de départ</label>
-												<div class="custom-select1">
-												    <input id="ville-depart" name="villeA" th:value="${result.villeA}" readonly></input>
-												</div>
-
-                                            <ul class="icon">
-                                                <li><a href="#" data-toggle="modal" data-target="#modal-id"><i class="fa fa-link"></i></a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
+             
+             <div class="row">
+    <div th:each="result : ${results}">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="room-img">
+                        <div class="box12">
+                            <img src="client/img/room/room-1.jpg">
+                            <div class="box-content">
+                                <h3 class="title" th:text="${result.avionA}"></h3>
+                                <label for="ville-depart">Avion A</label>
+                                <div class="custom-select1">
+                                    <input id="ville-depart" name="villeA" th:value="${result.avionA}" readonly></input>
                                 </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="room-des">
-                                  <h3><a href="#" data-toggle="modal" th:text="${result.villeR}+' vers ' + ${result.villeA}" th:attr="data-target='#modal-' + ${result.villeR}"></a></h3>
-
-                                    <ul class="room-size">
-                                        <li><i class="fa fa-arrow-right"></i>Size: 260 sq ft </li>
-                                        <li><i class="fa fa-arrow-right"></i>Beds: 2 Single(s) </li>
-                                    </ul>
-                                    <ul class="room-icon">
-                                        <li class="icon-1"></li>
-                                        <li class="icon-2"></li>
-                                        <li class="icon-3"></li>
-                                        <li class="icon-4"></li>
-                                        <li class="icon-5"></li>
-                                        <li class="icon-6"></li>
-                                        <li class="icon-7"></li>
-                                        <li class="icon-8"></li>
-                                        <li class="icon-9"></li>
-                                        <li class="icon-10"></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="room-rate">
-                                    <h3>From</h3>
-                                     <h2 th:text="${result.prixV}"></h2>
-                                    <a href="#">Book Now</a>
-                                </div>
+                                <ul class="icon">
+                                    <li><a href="#" data-toggle="modal" data-target="#modal-id"><i class="fa fa-link"></i></a></li>
+                                </ul>
                             </div>
                         </div>
-                        <hr>
                     </div>
-					 </div>
-                    
-                   
                 </div>
+                <div class="col-md-6">
+                    <div class="room-des">
+                        <h3><a href="#" data-toggle="modal" th:text="${result.avionR + ' vers ' + result.avionA}" th:attr="data-target='#modal-' + ${result.avionR}"></a></h3>
+                        <ul class="room-size">
+                            <li><i class="fa fa-arrow-right"></i> Heure de départ : <span th:text="${result.Aheured}"></span></li>
+                            <li><i class="fa fa-arrow-right"></i> Heure d'arrivée : <span th:text="${result.Aheurea}"></span></li>
+                            <li><i class="fa fa-arrow-right"></i> Type : <span th:text="${result.typeA}"></span></li>
+                            <li><i class="fa fa-arrow-right"></i> Durée : <span th:text="${result.durationA}"></span></li>
+                        </ul>
+                        <ul class="room-icon">
+                            <li class="icon-1"></li>
+                            <li class="icon-2"></li>
+                            <li class="icon-3"></li>
+                            <li class="icon-4"></li>
+                            <li class="icon-5"></li>
+                            <li class="icon-6"></li>
+                            <li class="icon-7"></li>
+                            <li class="icon-8"></li>
+                            <li class="icon-9"></li>
+                            <li class="icon-10"></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-3">
+    <div class="room-rate">
+        <h3>Prix</h3>
+        <h2 th:text="${result.prixV}"></h2>
+        <a th:href="@{/create-payment-intent(amount=${result.prixV}, currency='USD')}" target="_blank">Réserver maintenant</a>
+    </div>
+</div>
+
+            </div>
+            <hr>
+        </div>
+    </div>
+</div>
             </div>
         </div>
         <!-- Room Section End -->

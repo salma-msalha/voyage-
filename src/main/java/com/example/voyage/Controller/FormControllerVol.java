@@ -27,7 +27,7 @@ import java.util.List;
 public class FormControllerVol {
 
 	@PostMapping("/rechercher_vol")
-	public ModelAndView rechercher(@RequestParam("villeR") String villeR,
+	public ModelAndView rechercher_vol(@RequestParam("villeR") String villeR,
 	        @RequestParam("villeA") String villeA,
 	        @RequestParam("dateA") String dateAStr,
 	        @RequestParam("dateR") String dateRStr,
@@ -45,6 +45,7 @@ public class FormControllerVol {
 	        String encodedDateR = URLEncoder.encode(formattedDateR, "UTF-8");
 
 	        String url = "https://booking.kayak.com/flights/" + villeR + "-" + villeA + "/" + encodedDateA + "/" + encodedDateR + "?sort=price_a";
+	        System.out.println(url) ; 
 	        Document HdocE2 = Jsoup.connect(url).get();
 	        Elements flights = HdocE2.select("div.resultInner");
 

@@ -35,18 +35,33 @@
             <a href="index.html" class="logo"><img src="client/img/logo.jpg" alt="logo"></a>
             
             <div class="mobile-menu-btn"><i class="fa fa-bars"></i></div>
-            <nav class="main-menu top-menu">
-                <ul>
-                    <li class="active"><a href="index">Home</a></li>
-                    <li><a href="about">About Us</a></li>
-                    <li><a href="hébergements">Hébergements</a></li>
-                    <li><a href="réservations">Mes réservations</a></li>
-                    <li><a href="services">Services</a></li>
-                    <li><a href="booking">Booking</a></li>
-                    <li><a href="login">Login</a></li>
-                    <li><a href="contact">Contact Us</a></li>
-                    
-                   <li><a href="#"> <i class="fas fa-shopping-cart cart-icon"></i></a></div></li>
-                </ul>
-            </nav>
+          <nav class="main-menu top-menu">
+    <ul>
+        <li class="active"><a href="index">Home</a></li>
+        <li><a href="about">About Us</a></li>
+        <li><a href="hébergements">Hébergements</a></li>
+        <li><a href="vols">Vols</a></li>
+
+        <!-- Conditional elements based on client login status -->
+       <th:block th:if="${session.loggedIn}">
+            <!-- Elements to display when client is logged in -->
+            <li><a href="réservations">Mes réservations</a></li>
+            <li><a href="services">Services</a></li>
+            <li><a href="contact">Contact Us</a></li>
+            <li><a href="/logout">Logout</a></li>
+
+       </th:block>
+<th:block th:unless="${session.loggedIn}">
+            <!-- Elements to display when client is not logged in -->
+            <li><a href="services">Services</a></li>
+            <li><a href="contact">Contact Us</a></li>
+            <li><a href="login">Login</a></li>
+        </th:block>
+        <!-- End of conditional elements -->
+
+        <li><a href="#"><i class="fas fa-shopping-cart cart-icon"></i></a></li>
+    </ul>
+</nav>
+
+
         </header>

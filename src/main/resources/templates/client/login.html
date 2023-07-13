@@ -70,35 +70,35 @@
             </nav>
         </header>&nbsp;&nbsp;
 
-        <div class="login-wrap">
-            <div class="login-html">
-                <input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Se connecter</label>
-                 <div class="login-form">
-                  
-                  
-
-                         <div class="group">
-                            <label for="pass" class="label">Addresse Email </label>
-                            <input id="pass" type="text" class="input">
-                        </div>
-                        <div class="group">
-                            <label for="pass" class="label">Mot de passe </label>
-                           <div class="password-input">
-                                <input type="password" id="mot-de-passe2" name="mdp" class="input">
-                                <span class="toggle-password" onclick="togglePasswordVisibility('mdp')"><i class="fas fa-eye"></i></span>
-                            </div>
-                        </div>
-                       
-                       
-                        <div class="group">
-                            <input type="submit" class="button" value="S'inscrire">
-                        </div>
-                        <div class="hr"></div>
-                        
+       <div class="login-wrap">
+    <div class="login-html">
+        <form class="login-form" action="/login" method="post"> <!-- Ajout de la balise <form> avec l'action et la méthode -->
+            <input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Se connecter</label>
+            <div class="login-form">
+				 <th:block th:if="${session.msg}" th:with="msg=${session.msg}, color=${session.color}">
+    <p class="text-center fs-4" th:style="'color: ' + ${color}">[[${msg}]]</p>
+    <th:block th:text="${#session.removeAttribute('msg')}"></th:block>
+</th:block>
+                <div class="group">
+                    <label for="pass" class="label" name="email">Adresse Email</label>
+                    <input id="pass" type="text" class="input" name="email"> <!-- Ajout de l'attribut name pour récupérer la valeur dans le paramètre email -->
+                </div>
+                <div class="group">
+                    <label for="pass" class="label" name="password">Mot de passe</label>
+                    <div class="password-input">
+                        <input type="password" id="mot-de-passe2" name="password" class="input"> <!-- Ajout de l'attribut name pour récupérer la valeur dans le paramètre password -->
+                        <span class="toggle-password" onclick="togglePasswordVisibility('mot-de-passe2')"><i class="fas fa-eye"></i></span>
                     </div>
                 </div>
+                <div class="group">
+                    <input type="submit" class="button" value="Se connecter">
+                </div>
+                <div class="hr"></div>
             </div>
-        </div>&nbsp;&nbsp;
+        </form>
+    </div>
+</div>
+&nbsp;&nbsp;
 
 
         <!-- Header Section End -->

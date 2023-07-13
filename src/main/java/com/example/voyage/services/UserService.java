@@ -21,6 +21,8 @@ public interface UserService {
 
 	public Client getClientById(long clientId);
 
+	public Client getByEmail(String email);
+
 	
 
 }

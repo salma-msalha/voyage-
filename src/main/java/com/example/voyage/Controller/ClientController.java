@@ -22,6 +22,7 @@ import com.example.voyage.services.UserService;
 import ch.qos.logback.classic.Logger;
 import ch.qos.logback.classic.LoggerContext;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class ClientController {
@@ -76,25 +77,32 @@ public class ClientController {
 	 
 	 
 	 @PostMapping("/createUser")
-	 public String createuser(@ModelAttribute Client user, HttpSession session) {
+	 public String createuser(@ModelAttribute Client user, HttpSession session , ModelMap model) {
 
+		 user.setRole("user");
          boolean f=userService.checkEmail(user.getEmail());
 
-        if (f) {
-           session.setAttribute("msg","Email Id already exist");
-           session.setAttribute("color","red");
-        }else {
+         if (f) {
+        	 session.setAttribute("msg", "L'adresse e-mail existe déjà");
+        	 session.setAttribute("color", "red");
+        	 return "redirect:/register";
+        	}
+else {
 
 
         	Client userDtls =userService.createUser(user);
 
         if(userDtls!=null){
-            session.setAttribute("msg","Compte créer avec succés ! ");
-            session.setAttribute("color","green");
+            session.setAttribute("msg","Compte créé avec succès ! ! ");
+            session.setAttribute("color","#3ae067");
+            return "redirect:/login";
         }else {
             session.setAttribute("msg","Something error in server");
-            }}
-        return "redirect:/register";
+            return "redirect:/register";
+            }
+        
+        }
+       
     }
 	 
 	 @Transactional
@@ -170,6 +178,36 @@ public class ClientController {
 		    return "redirect:/Clients";
 		}
 
+
+
+	 @PostMapping("/login")
+	 public String login(@RequestParam("email") String email,
+	                     @RequestParam("password") String password , HttpSession session) {
+	     // Votre logique de traitement de la connexion ici
+	     // Par exemple, vérifier les informations d'identification, créer une session utilisateur, etc.
+	     Client utilisateur = userService.getByEmail(email);
+	     if (utilisateur != null && utilisateur.getMdp().equals(password)) {
+	         String role = utilisateur.getRole();
+	         
+	         session.setAttribute("loggedIn", true);
+	         
+	         if (role.equals("admin")) {
+	        	 return "redirect:/Clients"; // Rediriger vers le tableau de bord de l'administrateur
+	         } else if (role.equals("user")) {
+	        	 return "client/réservations";   // Rediriger vers le tableau de bord de l'utilisateur
+	         }
+	     }
+	     return "redirect:/user/login?error"; // Rediriger vers la page de connexion avec un message d'erreur
+	 }
+	 
+	 @GetMapping("/logout")
+	 public String logout(HttpSession session) {
+	     // Invalidate the session
+	     session.invalidate();
+
+	     // Redirect to the login page or any other page you prefer
+	     return "redirect:/login";
+	 }
 
 
 	 

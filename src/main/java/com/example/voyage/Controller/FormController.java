@@ -54,22 +54,27 @@ public class FormController {
 			default:
 				des_id=" "; break;
 	}
-            Document HdocE1 = Jsoup.connect("https://www.booking.com/searchresults.fr.html?ss=" + ville + "&ssne=" + ville + "&ssne_untouched=" + ville + "&label=gog235jc-1DCAEoggI46AdIDVgDaIwBiAEBmAENuAEXyAEV2AED6AEB-AECiAIBqAIDuAL0qoylBsACAdICJGI2MjgyYjY1LTlmOWQtNDAxMS05YjY2LWFjNzU0ZGVkNTczONgCBOACAQ&aid=397594&lang=fr&sb=1&src_elem=sb&src=searchresults&dest_id="+des_id+"&dest_type=city&checkin=" + checkin + "&checkout=" + checkout + "&group_adults=" + g_ad + "&no_rooms=" + n_r + "&group_children=" + g_ch).get();
-            Elements Hbody = HdocE1.select("div.d4924c9e74");
-			// Créer une liste de résultats du scraping
-			List<ResultatScraping> results = new ArrayList<>();
-			for (Element e : Hbody.select("div.a826ba81c4.fa2f36ad22.afd256fc79.d08f526e0d.ed11e24d01.ef9845d4b3.da89aeb942")) {
-			String img = e.select("div.f9d4f2568d img").attr("src");
-			String titre = e.select("div.f9d4f2568d img").attr("alt");
-			String desc = e.select("div.d8eab2cf7f").text();
-			String prix = "";
-			Element priceElement = e.selectFirst("span.fcab3ed991.fbd1d3018c.e729ed5ab6");
-			if (priceElement != null) {
-			    prix = priceElement.text();
-			}
+		Document HdocE1 = Jsoup.connect("https://www.booking.com/searchresults.fr.html?ss=" + ville + "&ssne=" + ville + "&ssne_untouched=" + ville + "&label=gog235jc-1DCAEoggI46AdIDVgDaIwBiAEBmAENuAEXyAEV2AED6AEB-AECiAIBqAIDuAL0qoylBsACAdICJGI2MjgyYjY1LTlmOWQtNDAxMS05YjY2LWFjNzU0ZGVkNTczONgCBOACAQ&aid=397594&lang=fr&sb=1&src_elem=sb&src=searchresults&dest_id="+des_id+"&dest_type=city&checkin=" + checkin + "&checkout=" + checkout + "&group_adults=" + g_ad + "&no_rooms=" + n_r + "&group_children=" + g_ch).get();
+		Elements Hbody = HdocE1.select("div.d4924c9e74");
 
-			results.add(new ResultatScraping(img, desc, titre, prix, checkin, checkout, g_ad, g_ch, n_r));
-			}
+		// Créer une liste de résultats du scraping
+		List<ResultatScraping> results = new ArrayList<>();
+		for (Element e : Hbody.select("div.a826ba81c4.fa2f36ad22.afd256fc79.d08f526e0d.ed11e24d01.ef9845d4b3.da89aeb942")) {
+		    String img = e.select("div.f9d4f2568d img").attr("src");
+		    String titre = e.select("div.f9d4f2568d img").attr("alt");
+		    String desc = e.select("div.d8eab2cf7f").text();
+		    String prix = "";
+		    Element priceElement = e.selectFirst("div.b48795b3df span.b5cd09854e");
+		    if (priceElement != null) {
+		        prix = priceElement.text();
+		    }
+
+		    // Créer un objet ResultatScraping avec les données extraites
+		    ResultatScraping resultat = new ResultatScraping(img, desc, titre, prix, checkin, checkout, g_ad, g_ch, n_r);
+		    results.add(resultat);
+		}
+
+
 
            
             

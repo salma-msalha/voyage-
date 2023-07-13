@@ -62,6 +62,18 @@ public class UserServiceImpl implements UserService{
     }
 
 
+	@Override
+	public Client getByEmail(String email) {
+	    // TODO: Implémenter la logique pour récupérer un utilisateur par son email depuis votre source de données (par exemple, une base de données)
+	    // Vous pouvez utiliser un repository ou un autre mécanisme pour effectuer cette recherche
+
+	    // Exemple de code fictif pour illustrer la logique de recherche par email
+	    Client client = userRepo.findByEmail(email);
+	    return client; // Retourne l'utilisateur trouvé ou null s'il n'existe pas avec cet email
+	}
+
+
+
 	
     
 }
